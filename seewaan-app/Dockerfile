@@ -7,7 +7,7 @@ WORKDIR /app
 RUN apk add --no-cache git && \
     git clone https://github.com/tkhumush/Seewaan.git . && \
     npm install && \
-    npm run build
+    npx vite build
 
 # Production stage with nginx
 FROM nginx:alpine
