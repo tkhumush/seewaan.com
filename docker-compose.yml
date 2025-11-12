@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  seewaan:
+    build:
+      context: ./seewaan-app
+      dockerfile: Dockerfile
+    container_name: seewaan
+    restart: unless-stopped
+    volumes:
+      - ./public:/usr/share/nginx/html/public
+    networks:
+      - seewaan-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"  # HTTP/3
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - seewaan-network
+    depends_on:
+      - seewaan
+
+networks:
+  seewaan-network:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

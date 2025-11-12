@@ -1,0 +1,24 @@
+# Docker volumes and data
+caddy_data/
+caddy_config/
+
+# Environment files
+.env
+.env.local
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.swp
+*~

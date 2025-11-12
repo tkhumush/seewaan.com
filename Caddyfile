@@ -1,0 +1,38 @@
+seewaan.com {
+    # Reverse proxy to Seewaan app
+    reverse_proxy seewaan:80
+
+    # Enable HTTP/3
+    protocols h1 h2 h3
+
+    # Logging
+    log {
+        output file /data/access.log
+        format json
+    }
+
+    # Security headers
+    header {
+        # Enable HSTS
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        # Prevent clickjacking
+        X-Frame-Options "SAMEORIGIN"
+        # Prevent MIME type sniffing
+        X-Content-Type-Options "nosniff"
+        # Enable XSS protection
+        X-XSS-Protection "1; mode=block"
+        # Referrer policy
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+
+    # Compression
+    encode gzip
+
+    # Handle .well-known and favicon from public directory
+    # These will be served directly from the seewaan container
+}
+
+www.seewaan.com {
+    # Redirect www to non-www
+    redir https://seewaan.com{uri} permanent
+}
