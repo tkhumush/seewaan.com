@@ -2,9 +2,6 @@ seewaan.com {
     # Reverse proxy to Seewaan app
     reverse_proxy seewaan:80
 
-    # Enable HTTP/3
-    protocols h1 h2 h3
-
     # Logging
     log {
         output file /data/access.log
