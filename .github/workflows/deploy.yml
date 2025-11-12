@@ -52,7 +52,8 @@ jobs:
 
             echo "🐳 Rebuilding and restarting services..."
             docker compose down
-            docker compose up -d --build
+            docker compose build --no-cache seewaan
+            docker compose up -d
 
             echo "🧹 Cleaning up old Docker images..."
             docker image prune -f
