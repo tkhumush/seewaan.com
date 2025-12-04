@@ -1,4 +1,4 @@
-seewaan.com {
+seewaan.com, nostrhood.social {
     # Reverse proxy to Seewaan app
     reverse_proxy seewaan:80
 
@@ -32,4 +32,9 @@ seewaan.com {
 www.seewaan.com {
     # Redirect www to non-www
     redir https://seewaan.com{uri} permanent
+}
+
+www.nostrhood.social {
+    # Redirect www to non-www
+    redir https://nostrhood.social{uri} permanent
 }
